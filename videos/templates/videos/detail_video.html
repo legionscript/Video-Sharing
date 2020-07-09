@@ -1,0 +1,51 @@
+{% extends 'videos/base.html' %}
+
+{% block content %}
+	<div class="container">
+		<div class="row mt-5">
+			<div class="col-md-8 col-sm-12 col-xs-12">
+				<video-js
+					width="720"
+					height="405"
+					controls
+					data-setup='{"playbackRates": [0.5, 1, 1.5, 2], "fluid": true}'>
+					<source src="/media/{{ object.video_file }}" type="video/mp4">
+					<p class="vjs-no-js">
+					To view this video please enable Javascript, and consider upgrading to a web browser that <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+					</p>
+				</video-js>
+				<h5 class="mt-4">{{ object.title }}</h5>
+				<div class="row">
+					<div class="col-md-6 text-muted">
+						<p>{{ object.date_posted | date:"M d, Y" }}</p>
+					</div>
+					<div class="col-md-6 text-muted text-right">
+						<ion-icon class="video-icons" name="share-social-outline" type="button"  data-toggle="modal" data-target="#exampleModal">
+                        Share
+                    </ion-icon>
+                    
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Share This Video!</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <ion-icon class="social-share-icons twitter-social-color" name="logo-twitter" data-sharer="twitter" data-title="Checkout {{ object.title }}!" data-hashtags="" data-url="http://localhost:8000/videos/{{ object.pk }}">Share on Twitter</ion-icon>                                
+                                <ion-icon class="social-share-icons facebook-social-color" name="logo-facebook" data-sharer="facebook" data-title="Checkout {{ object.title }} by {{ object.uploader }}!" data-hashtags="" data-url="http://localhost:8000/videos/{{ object.pk }}">Share on Facebook</ion-icon>
+                                <ion-icon class="social-share-icons reddit-social-color" name="logo-reddit" data-sharer="reddit" data-title="Checkout {{ object.title }} by {{ object.uploader }}!" data-hashtags="" data-url="http://localhost:8000/videos/{{ object.pk }}">Share on Reddit</ion-icon>
+                                <p class="mt-3">Link: http://localhost:8000/videos/{{ object.pk }}</p>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+			</div>
+		</div>
+	</div>
+
+{% endblock content %}
