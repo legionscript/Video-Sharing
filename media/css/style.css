@@ -70,3 +70,12 @@
     text-decoration: none;
     transition: .3s;
 }
+
+.category-link {
+    transition: 0.3s;
+}
+
+.category-link:hover {
+    transition: 0.3s;
+    text-decoration: none;
+}

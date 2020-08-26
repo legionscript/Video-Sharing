@@ -19,6 +19,7 @@
 				<div class="row">
 					<div class="col-md-6 text-muted">
 						<p>{{ object.date_posted | date:"M d, Y" }}</p>
+                        <a class="category-link" href="{% url 'category-list' object.category.pk %}">{{ object.category }}</a>
 					</div>
 					<div class="col-md-6 text-muted text-right">
 						<ion-icon class="video-icons" name="share-social-outline" type="button"  data-toggle="modal" data-target="#exampleModal">
@@ -53,6 +54,19 @@
 			<a class="video-icons icon-color" href="{% url 'video-delete' object.pk %}"><ion-icon name="close-outline"></ion-icon></a>
 		{% endif %}
 	</div>
+    <div class="col-md-4 col-sm-12 col-xs-12">
+        <h3 class="text-center mb-3">Similar Videos</h3>
+        {% for category in categories %}
+            {% if object.pk != category.pk %}
+                <div class="position-relative d-flex flex-row mb-5 py-2 border-bottom">
+                    <img src="{{ category.thumbnail.url }}" width="100" height="50" />
+                    <h5 class="pl-3">{{ category.title }}</h5>
+                    <a href="{% url 'video-detail' category.pk %}" class="stretched-link"></a>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
 </div>
     <div class="row mt-3">
         <div class="col-md-8 col-sm-12">
