@@ -1,4 +1,5 @@
 from django.shortcuts import render, reverse
+from django.db.models import Q
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
@@ -103,3 +104,20 @@ class VideoCategoryList(View):
         }
 
         return render(request, 'videos/video_category.html', context)
+
+
+class SearchVideo(View):
+    def get(self, request, *args, **kwargs):
+        query = self.request.GET.get("q")
+
+        query_list = Video.objects.filter(
+            Q(title__icontains=query) |
+            Q(description__icontains=query) |
+            Q(uploader__username__icontains=query)
+        )
+
+        context = {
+            'query_list': query_list,
+        }
+
+        return render(request, 'videos/search.html', context)

@@ -5,6 +5,10 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <form class="form-inline my-2 my-lg-0 d-flex flex-row" method="GET" action="{% url 'video-search' %}">
+        <input class="form-control mr-sm-2" type="search" name="q" placeholder="Search" aria-label="Search" value="{{ request.GET.q }}">
+        <button class="search-button" type="submit"><ion-icon name="search-outline"></ion-icon></button>
+      </form>
       <ul class="navbar-nav mr-auto">
       </ul>
       <ul class="navbar-nav">
